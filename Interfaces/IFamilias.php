@@ -1,10 +1,9 @@
 <?php
 require_once '../Entidades/Familia.php';
 interface IFamilias{
-    public function Guardar(Familia $familia);
-    public function Cargar(): array;
-    public function Actualizar(Familia $familia);
-    public function Eliminar(Familia $familia);
-
+    public function guardar(Familia $familia);
+    public function cargar(): array;
+    public function modificar(Familia $familia);
+    public function eliminar(Familia $familia);
     }
 ?>

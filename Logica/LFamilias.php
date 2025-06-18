@@ -11,7 +11,7 @@ class LFamilia implements IFamilia {
     }
 
 
-    public function cargar(Familia $familia) {
+    public function cargar(Familias $familia) {
         $stmt = $this->conexion->prepare("INSERT INTO familias (nombres, descripcion) VALUES (?, ?)");
         return $stmt->execute([
             $familia->getNombres(),
@@ -19,7 +19,7 @@ class LFamilia implements IFamilia {
         ]);
     }
 
-    public function modificar(Familia $familia) {
+    public function modificar(Familias $familia) {
         $stmt = $this->conexion->prepare("UPDATE familias SET nombres = ?, descripcion = ? WHERE idfamilia = ?");
         return $stmt->execute([
             $familia->getNombres(),
