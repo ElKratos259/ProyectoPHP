@@ -1,18 +1,15 @@
 <?php
 class Familia {
-    // Atributos privados
     private $idfamilia;
     private $nombres;
     private $descripcion;
 
-    // Constructor
     public function __construct($idfamilia = null, $nombres = '', $descripcion = '') {
         $this->idfamilia = $idfamilia;
         $this->nombres = $nombres;
         $this->descripcion = $descripcion;
     }
 
-    // Getter y Setter para idfamilia
     public function getIdfamilia() {
         return $this->idfamilia;
     }
@@ -21,7 +18,6 @@ class Familia {
         $this->idfamilia = $idfamilia;
     }
 
-    // Getter y Setter para nombres
     public function getNombres() {
         return $this->nombres;
     }
@@ -30,7 +26,6 @@ class Familia {
         $this->nombres = $nombres;
     }
 
-    // Getter y Setter para descripcion
     public function getDescripcion() {
         return $this->descripcion;
     }
