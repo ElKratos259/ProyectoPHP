@@ -10,15 +10,16 @@ class LFamilia implements IFamilia {
         $this->conexion = DB::conectar();
     }
 
-    public function guardar(Familias $familia) {
-        $stmt = $this->conexion->prepare("INSERT INTO familias (nombres, descripcion) VALUES (?, ?)");
+    public function cargar(Familias $familia) {
+        $stmt = $this->conexion->prepare("SELECT * FROM familias");
         return $stmt->execute([
+            $familia->getIdfamilia(),
             $familia->getNombres(),
             $familia->getDescripcion()
         ]);
     }
 
-    public function cargar(Familias $familia) {
+    public function guardar(Familias $familia) {
         $stmt = $this->conexion->prepare("INSERT INTO familias (nombres, descripcion) VALUES (?, ?)");
         return $stmt->execute([
             $familia->getNombres(),
