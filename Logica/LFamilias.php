@@ -1,25 +1,22 @@
 <?php 
 require_once '../Datos/DB.php';
 require_once '../Entidades/Familia.php';
-require_once '../Interfaces/IFamilia.php';
+require_once '../Interfaces/IFamilias.php';
 
-class LFamilia implements IFamilia {
+class LFamilia implements IFamilias {
     private $conexion;
 
     public function __construct() {
         $this->conexion = DB::conectar();
     }
 
-    public function cargar(Familias $familia) {
+    public function cargar(): array {
         $stmt = $this->conexion->prepare("SELECT * FROM familias");
-        return $stmt->execute([
-            $familia->getIdfamilia(),
-            $familia->getNombres(),
-            $familia->getDescripcion()
-        ]);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function guardar(Familias $familia) {
+    public function guardar(Familia $familia) {
         $stmt = $this->conexion->prepare("INSERT INTO familias (nombres, descripcion) VALUES (?, ?)");
         return $stmt->execute([
             $familia->getNombres(),
@@ -27,7 +24,7 @@ class LFamilia implements IFamilia {
         ]);
     }
 
-    public function modificar(Familias $familia) {
+    public function modificar(Familia $familia) {
         $stmt = $this->conexion->prepare("UPDATE familias SET nombres = ?, descripcion = ? WHERE idfamilia = ?");
         return $stmt->execute([
             $familia->getNombres(),
