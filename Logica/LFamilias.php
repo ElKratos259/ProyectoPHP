@@ -1,7 +1,7 @@
-<?php
-require_once '../INTERFACES/IFamilias.php';
-require_once '../DATOS/DB.php';
-require_once '../ENTIDADES/Familia.php';
+<?php 
+require_once '../Datos/DB.php';
+require_once '../Entidades/Familia.php';
+require_once '../Interfaces/IFamilias.php';
 
 class LFamilia implements IFamilias {
     private $conexion;
@@ -10,7 +10,7 @@ class LFamilia implements IFamilias {
         $this->conexion = DB::conectar();
     }
 
-    public function Guardar(Familia $familia) {
+    public function guardar(Familia $familia) {
         $stmt = $this->conexion->prepare("INSERT INTO familias (nombres, descripcion) VALUES (?, ?)");
         $stmt->execute([
             $familia->getNombres(),

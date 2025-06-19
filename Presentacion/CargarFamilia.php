@@ -3,40 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mantenimiento de Familias</title>
+    <title>Document</title>
 </head>
-<body>
-    <table class="table table-dark">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            </tr>
-            <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            </tr>
-            <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            </tr>
-        </tbody>
-</table>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<tbody>
+<?php
+require '../Logica/LFamilias.php';
+$log = new LFamilia();
+foreach($log->cargar() as $familia){
+?>
+<tr>
+    <td><?= $familia->getIdFamilia() ?></td>
+    <td><?= $familia->getNombres() ?></td>
+    <td><?= $familia->getDescripcion() ?></td>
+    <td>
+        <form method="POST" action="eliminarfamilia.php" onsubmit="return confirm('¿Estás seguro de borrar?');">
+            <input type="hidden" name="idfamilia" value="<?= $familia->getIdFamilia() ?>">
+            <button type="submit">Borrar</button>
+        </form>
+    </td>
+</tr>
+<?php } ?>
+</tbody>
+
+        </table>
+    </div>
 </body>
 </html>
