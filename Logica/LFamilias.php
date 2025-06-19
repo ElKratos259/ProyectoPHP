@@ -18,12 +18,24 @@ class LFamilia implements IFamilias {
         ]);
     }
 
-    public function Cargar(): array {
+    public function cargar(): array {
         $stmt = $this->conexion->query("SELECT * FROM familias");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $familias = [];
+
+        foreach ($filas as $fila) {
+            $familia = new Familia(
+                $fila['idfamilia'],
+                $fila['nombres'],
+                $fila['descripcion']
+            );
+            $familias[] = $familia;
+        }
+
+        return $familias;
     }
 
-    public function Actualizar(Familia $familia) {
+    public function actualizar(Familia $familia) {
         $stmt = $this->conexion->prepare("UPDATE familias SET nombres = ?, descripcion = ? WHERE idfamilia = ?");
         $stmt->execute([
             $familia->getNombres(),
@@ -32,8 +44,9 @@ class LFamilia implements IFamilias {
         ]);
     }
 
-    public function Eliminar(Familia $familia) {
+    public function eliminar(Familia $familia) {
         $stmt = $this->conexion->prepare("DELETE FROM familias WHERE idfamilia = ?");
         $stmt->execute([$familia->getIdfamilia()]);
     }
 }
+?>

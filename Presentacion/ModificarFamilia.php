@@ -1,7 +1,7 @@
 <?php
 
-require_once '../LOGICA/LFamilia.php';
-require_once '../ENTIDADES/Familia.php';
+require_once '../Logica/LFamilias.php';
+require_once '../Entidades/Familia.php';
 
 $lFamilia = new LFamilia();
 
@@ -10,9 +10,9 @@ if (isset($_GET['idfamilia'])) {
     $familias = $lFamilia->Cargar();
 
     foreach ($familias as $f) {
-        if ($f['idfamilia'] == $id) {
-            $nombre = $f['nombres'];
-            $descripcion = $f['descripcion'];
+        if ($f->getIdfamilia() == $id) {
+            $nombre = $f->getNombres();
+            $descripcion = $f->getDescripcion();
             break;
         }
     }
@@ -24,7 +24,7 @@ if (isset($_GET['idfamilia'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
     $familia = new Familia($_POST['idfamilia'], $_POST['nombres'], $_POST['descripcion']);
     $lFamilia->Actualizar($familia);
-    echo "<script>alert('Familia modificada correctamente'); window.location.href='listarFamilias.php';</script>";
+    echo "<script>alert('Familia modificada correctamente'); window.location.href='cargarFamilia.php';</script>";
 }
 ?>
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
         <textarea name="descripcion" rows="4" cols="50" required><?= htmlspecialchars($descripcion); ?></textarea><br><br>
 
         <input type="submit" name="modificar" value="Modificar">
-        <a href="listarFamilias.php"><button type="button">Atrás</button></a>
+        <a href="cargarFamilia.php"><button type="button">Atrás</button></a>
     </form>
 </body>
 </html>
