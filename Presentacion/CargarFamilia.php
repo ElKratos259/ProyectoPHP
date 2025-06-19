@@ -6,8 +6,7 @@
     <title>Listado de Familias</title>
 </head>
 <body>
-    <h2>Familias</h2>
-    <hr>
+    <h2>Familias</h2><hr>
     <a href="agregarFamilia.php"><button type="button">Agregar Familia</button></a>
 
     <div>
