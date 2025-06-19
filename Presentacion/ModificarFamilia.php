@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])) {
     <title>Modificar Familia</title>
 </head>
 <body>
-    <h2>Modificar Familia</h2>
+    <h2>Modificar Familia</h2><hr>
     <form method="POST">
         <input type="hidden" name="idfamilia" value="<?= htmlspecialchars($id); ?>">
 
