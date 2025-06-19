@@ -10,39 +10,30 @@ class LFamilia implements IFamilias {
         $this->conexion = DB::conectar();
     }
 
-    public function cargar(): array {
-    $stmt = $this->conexion->prepare("SELECT * FROM familias");
-    $stmt->execute();
-    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $lista = [];
-    foreach ($resultados as $row) {
-        $familia = new Familia($row['idfamilia'], $row['nombres'], $row['descripcion']);
-        $lista[] = $familia;
-    }
-    return $lista;
-}
-
     public function guardar(Familia $familia) {
         $stmt = $this->conexion->prepare("INSERT INTO familias (nombres, descripcion) VALUES (?, ?)");
-        return $stmt->execute([
+        $stmt->execute([
             $familia->getNombres(),
             $familia->getDescripcion()
         ]);
     }
 
-    public function modificar(Familia $familia) {
+    public function Cargar(): array {
+        $stmt = $this->conexion->query("SELECT * FROM familias");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function Actualizar(Familia $familia) {
         $stmt = $this->conexion->prepare("UPDATE familias SET nombres = ?, descripcion = ? WHERE idfamilia = ?");
-        return $stmt->execute([
+        $stmt->execute([
             $familia->getNombres(),
             $familia->getDescripcion(),
             $familia->getIdfamilia()
         ]);
     }
 
-    public function eliminar($idfamilia) {
+    public function Eliminar(Familia $familia) {
         $stmt = $this->conexion->prepare("DELETE FROM familias WHERE idfamilia = ?");
-        return $stmt->execute([$idfamilia]);
+        $stmt->execute([$familia->getIdfamilia()]);
     }
 }
-?>
