@@ -1,6 +1,7 @@
-require_once '../Interfaces/IFamilias.php';
-require_once '../Datos/DB.php';
-require_once '../Entidades/Familia.php';
+<?php
+require_once '../INTERFACES/IFamilias.php';
+require_once '../DATOS/DB.php';
+require_once '../ENTIDADES/Familia.php';
 
 class LFamilia implements IFamilias {
     private $conexion;
