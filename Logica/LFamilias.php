@@ -11,10 +11,17 @@ class LFamilia implements IFamilias {
     }
 
     public function cargar(): array {
-        $stmt = $this->conexion->prepare("SELECT * FROM familias");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $this->conexion->prepare("SELECT * FROM familias");
+    $stmt->execute();
+    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $lista = [];
+    foreach ($resultados as $row) {
+        $familia = new Familia($row['idfamilia'], $row['nombres'], $row['descripcion']);
+        $lista[] = $familia;
     }
+    return $lista;
+}
 
     public function guardar(Familia $familia) {
         $stmt = $this->conexion->prepare("INSERT INTO familias (nombres, descripcion) VALUES (?, ?)");
